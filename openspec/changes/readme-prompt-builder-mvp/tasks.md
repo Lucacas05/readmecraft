@@ -1,34 +1,26 @@
 # Tasks: README Prompt Builder MVP
 
-## Phase 1: Setup and foundation
+## Phase 1: Setup and design system
 
-- [ ] 1.1 Create `package.json`, `tsconfig.json`, and `vite.config.ts` for a React + Vite + TypeScript SPA with Vitest and React Testing Library.
-- [ ] 1.2 Create `src/main.tsx`, `src/App.tsx`, and `src/styles.css` with a minimal app bootstrap and deferred visual identity styling.
-- [ ] 1.3 Create `src/types/readme.ts` for `ReadmeConfig`, enums/unions, output contracts, and section keys used across UI and generators.
+- [ ] 1.1 Create `package.json`, `tsconfig.json`, `vite.config.ts`, `postcss.config.js`, `tailwind.config.ts`, and `src/main.tsx` for a React + Vite + TypeScript SPA with Tailwind, Vitest, and shadcn-compatible alias/path setup.
+- [ ] 1.2 Create `src/styles.css`, `src/lib/utils.ts`, and `src/components/ui/button.tsx` with brutalist tokens/utilities (cream/black/green palette, square corners, 2px borders) instead of stock shadcn defaults.
+- [ ] 1.3 Create `src/components/ui/animated-hero.tsx` and `src/components/ui/code-block.tsx` by adapting the referenced 21st.dev structures into poster-like hero/artifact panels; keep prompt rendering plain monospace first and leave `shiki` optional/deferred.
 
-## Phase 2: Domain model and state
+## Phase 2: Domain model and shared copy
 
-- [ ] 2.1 Create `src/data/presets.ts` with the four locked MVP presets: Minimal, Professional, Open Source, and Portfolio.
-- [ ] 2.2 Create `src/state/readme-config.tsx` with reducer, provider, defaults, preset application, and a guard that prevents disabling the last enabled section.
-- [ ] 2.3 Add config-to-label/helper mappings in `src/lib/readme-copy.ts` so generator wording stays stable if UI labels change.
+- [ ] 2.1 Create `src/types/readme.ts` and `src/data/presets.ts` with `ReadmeConfig`, section/tone/presentation contracts, and the locked presets: Minimal, Professional, Open Source, and Portfolio.
+- [ ] 2.2 Create `src/state/readme-config.tsx` with reducer, provider, valid default preset, preset application, and a guard that prevents disabling the last enabled section.
+- [ ] 2.3 Create `src/lib/readme-copy.ts` with stable UI labels, local-agent disclaimers, and illustrative-preview messaging reused by generators and panels.
 
-## Phase 3: UI and interaction wiring
+## Phase 3: Outputs and UI wiring
 
-- [ ] 3.1 Create `src/components/layout/AppShell.tsx` with header copy explaining the local-agent handoff and a responsive configurator/output layout.
-- [ ] 3.2 Create `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, and `PresentationControl.tsx` bound to reducer actions.
-- [ ] 3.3 Create `src/components/configurator/SectionToggleList.tsx` and `PreviewNotice.tsx` with at-least-one-section validation and illustrative-preview messaging.
-- [ ] 3.4 Wire the full page composition in `src/App.tsx` so control changes recompute both outputs from one config snapshot.
+- [ ] 3.1 Create `src/lib/generate-prompt.ts` and `src/lib/generate-preview.ts` so one `ReadmeConfig` snapshot drives both outputs, requires local repo inspection, and keeps preview content placeholder-safe.
+- [ ] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
+- [ ] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
+- [ ] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
 
-## Phase 4: Prompt and preview outputs
+## Phase 4: Verification
 
-- [ ] 4.1 Create `src/lib/generate-prompt.ts` to build a copy-ready template that instructs the IDE agent to inspect the local repo, infer facts, and avoid fabrication.
-- [ ] 4.2 Create `src/components/output/PromptPanel.tsx` with rendered prompt text and clipboard copy for the current template.
-- [ ] 4.3 Create `src/lib/generate-preview.ts` to build placeholder-safe markdown reflecting selected order, sections, tone, and presentation.
-- [ ] 4.4 Create `src/components/output/PreviewPanel.tsx` to render the illustrative README preview and keep it synchronized with the prompt output.
-
-## Phase 5: Verification
-
-- [ ] 5.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, selection mapping, and no user-fact collection claims.
-- [ ] 5.2 Create `src/lib/__tests__/generate-preview.test.ts` covering placeholder-only content, section ordering, and preview/prompt alignment inputs.
-- [ ] 5.3 Create `src/state/__tests__/readme-config.test.tsx` covering default preset validity, preset merges, and the last-section guardrail.
-- [ ] 5.4 Create `src/components/__tests__/App.test.tsx` verifying one control change updates both panels and helper copy/labels appear on first load.
+- [ ] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
+- [ ] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
+- [ ] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.
