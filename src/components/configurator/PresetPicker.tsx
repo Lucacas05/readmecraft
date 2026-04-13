@@ -9,7 +9,7 @@ type PresetPickerProps = {
 
 export function PresetPicker({ activePreset, onSelect }: PresetPickerProps) {
   return (
-    <div className="grid gap-3 md:grid-cols-2">
+    <div className="flex flex-wrap gap-2">
       {README_PRESET_ORDER.map((preset) => {
         const isActive = preset.key === activePreset;
 
@@ -19,14 +19,13 @@ export function PresetPicker({ activePreset, onSelect }: PresetPickerProps) {
             type="button"
             onClick={() => onSelect(preset.key)}
             className={cn(
-              "border-2 p-4 text-left transition-colors",
+              "border-2 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] transition-colors",
               isActive
                 ? "border-border bg-primary text-primary-foreground shadow-brutal"
                 : "border-border bg-background hover:bg-highlight",
             )}
           >
-            <span className="block font-black uppercase tracking-[0.14em]">{preset.name}</span>
-            <span className="mt-2 block text-sm leading-6 opacity-90">{preset.summary}</span>
+            {preset.name}
           </button>
         );
       })}

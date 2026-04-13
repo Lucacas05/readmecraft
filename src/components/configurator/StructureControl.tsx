@@ -13,6 +13,7 @@ export function StructureControl({ value, onChange }: StructureControlProps) {
       {README_STRUCTURE_KEYS.map((structure) => (
         <Button
           key={structure}
+          size="sm"
           variant={value === structure ? "default" : "outline"}
           onClick={() => onChange(structure)}
         >

@@ -13,6 +13,7 @@ export function PresentationControl({ value, onChange }: PresentationControlProp
       {README_PRESENTATION_KEYS.map((presentation) => (
         <Button
           key={presentation}
+          size="sm"
           variant={value === presentation ? "default" : "outline"}
           onClick={() => onChange(presentation)}
         >

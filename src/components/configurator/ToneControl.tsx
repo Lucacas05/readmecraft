@@ -11,7 +11,7 @@ export function ToneControl({ value, onChange }: ToneControlProps) {
   return (
     <div className="flex flex-wrap gap-3">
       {README_TONE_KEYS.map((tone) => (
-        <Button key={tone} variant={value === tone ? "default" : "outline"} onClick={() => onChange(tone)}>
+        <Button key={tone} size="sm" variant={value === tone ? "default" : "outline"} onClick={() => onChange(tone)}>
           {README_TONE_LABELS[tone]}
         </Button>
       ))}
