@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm list:*)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npm run:*)",
+      "Bash(echo \"PID=$!\")",
+      "Read(//tmp/**)",
+      "Bash(npm init:*)",
+      "Bash(npm i:*)",
+      "Bash(node pw-check.mjs before)",
+      "Bash(node pw-check.mjs after)",
+      "Bash(npm test:*)",
+      "Bash(kill 80018)",
+      "Bash(wait 80018)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

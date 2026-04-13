@@ -11,10 +11,6 @@ type AnimatedHeroProps = {
     label: string;
     onClick: () => void;
   };
-  secondaryCta?: {
-    label: string;
-    onClick: () => void;
-  };
 };
 
 const DEFAULT_WORDS = ["clear", "local", "usable", "sharp"];
@@ -23,7 +19,6 @@ export function AnimatedHero({
   className,
   rotatingWords = DEFAULT_WORDS,
   primaryCta,
-  secondaryCta,
 }: AnimatedHeroProps) {
   const words = useMemo(
     () => (rotatingWords.length > 0 ? rotatingWords : DEFAULT_WORDS),
@@ -41,56 +36,28 @@ export function AnimatedHero({
 
   return (
     <section className={cn("section-shell overflow-hidden", className)}>
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-4xl space-y-6">
-          <span className="eyebrow">Chooser-first README setup</span>
+      <div className="flex flex-col items-center gap-10 text-center">
+        <h1 className="text-balance text-6xl leading-none sm:text-7xl md:text-8xl lg:text-[7rem]">
+          Build a README prompt that stays
+          <span className="relative mt-3 block min-h-[1.1em] text-primary">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={words[activeIndex]}
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -22 }}
+                transition={{ duration: 0.24, ease: "easeOut" }}
+                className="block"
+              >
+                {words[activeIndex]}.
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </h1>
 
-          <div className="space-y-4">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              Backend-free MVP · local agent handoff later
-            </p>
-
-            <h1 className="text-balance text-5xl leading-none sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-              Build a README prompt that stays
-              <span className="relative mt-3 block min-h-[1.1em] text-primary">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={words[activeIndex]}
-                    initial={{ opacity: 0, y: 22 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -22 }}
-                    transition={{ duration: 0.24, ease: "easeOut" }}
-                    className="block"
-                  >
-                    {words[activeIndex]}.
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-            </h1>
-          </div>
-
-          <p className="support-copy">
-            Pick structure, tone, presentation, and sections from one shared
-            config object. The app stays chooser-only here, then hands the real
-            repository inspection to your local IDE agent later.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-          <Button size="lg" onClick={primaryCta?.onClick}>
-            {primaryCta?.label ?? "Start with presets"}
-          </Button>
-          {secondaryCta ? (
-            <Button
-              variant="outline"
-              size="lg"
-              className="justify-between"
-              onClick={secondaryCta.onClick}
-            >
-              {secondaryCta.label}
-            </Button>
-          ) : null}
-        </div>
+        <Button size="lg" onClick={primaryCta?.onClick}>
+          {primaryCta?.label ?? "Start building"}
+        </Button>
       </div>
     </section>
   );

@@ -21,8 +21,7 @@ const STEPS: Step[] = [
 export function HowItWorks() {
   return (
     <section className="space-y-8">
-      <div className="space-y-3 text-center">
-        <p className="eyebrow mx-auto">The flow</p>
+      <div className="text-center">
         <h2 className="text-balance text-4xl leading-none sm:text-5xl md:text-6xl">
           How it works.
         </h2>
