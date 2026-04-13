@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 25% 92%;
+    --foreground: 0 0% 10%;
+    --card: 48 25% 92%;
+    --card-foreground: 0 0% 10%;
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
+    --primary: 120 33% 27%;
+    --primary-foreground: 48 25% 92%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 48 25% 92%;
+    --muted: 48 18% 87%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 120 30% 31%;
+    --accent-foreground: 48 25% 92%;
+    --highlight: 120 32% 61%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-black uppercase tracking-tighterer;
+  }
+
+  a {
+    @apply underline decoration-2 underline-offset-4 transition-colors;
+  }
+
+  ::selection {
+    @apply bg-highlight text-foreground;
+  }
+}
+
+@layer components {
+  .poster-frame {
+    @apply border-2 border-border bg-card shadow-brutal;
+  }
+
+  .section-shell {
+    @apply poster-frame p-6 md:p-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex border-2 border-border bg-highlight px-3 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-foreground;
+  }
+
+  .support-copy {
+    @apply max-w-2xl text-sm leading-6 text-muted-foreground md:text-base;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
