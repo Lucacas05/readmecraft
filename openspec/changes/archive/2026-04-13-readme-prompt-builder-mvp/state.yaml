@@ -1,0 +1,14 @@
+change: readme-prompt-builder-mvp
+status: archived
+phase: archive
+completed: true
+archived_at: 2026-04-13
+archive_path: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp
+artifacts:
+  proposal: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/proposal.md
+  specs: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/specs/
+  design: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/design.md
+  tasks: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/tasks.md
+  apply_progress: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/apply-progress.md
+  verify_report: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/verify-report.md
+  archive_report: openspec/changes/archive/2026-04-13-readme-prompt-builder-mvp/archive-report.md
