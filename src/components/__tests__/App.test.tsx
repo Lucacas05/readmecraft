@@ -16,8 +16,7 @@ function renderAt(path: string) {
 }
 
 function getPromptSection() {
-  const heading = screen.getByRole("heading", { name: /unified handoff for your local ide agent/i });
-  return heading.closest("section") as HTMLElement;
+  return screen.getByRole("region", { name: /unified handoff for your local ide agent/i });
 }
 
 describe("LandingPage", () => {
@@ -29,11 +28,11 @@ describe("LandingPage", () => {
       screen.getByRole("heading", { name: /build a readme prompt that stays/i }),
     ).toBeInTheDocument();
 
-    expect(screen.queryByRole("heading", { name: /unified handoff for your local ide agent/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: /unified handoff for your local ide agent/i })).not.toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /start building/i }));
 
-    expect(screen.getByRole("heading", { name: /unified handoff for your local ide agent/i })).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: /unified handoff for your local ide agent/i })).toBeInTheDocument();
   });
 });
 
@@ -54,7 +53,10 @@ describe("BuilderPage", () => {
     expect(
       screen.queryByText(/one copy now contains the instructions and the readme template generated from this same shared config/i),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /see more/i })).toHaveAttribute("aria-expanded", "false");
+    const seeMore = screen.getByRole("button", { name: /see more/i });
+    expect(seeMore).toHaveAttribute("aria-expanded", "false");
+    expect(seeMore).toHaveAttribute("aria-haspopup", "dialog");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
     const promptSection = getPromptSection();
 
@@ -113,15 +115,26 @@ describe("BuilderPage", () => {
     expect(screen.getByRole("button", { name: /copied/i })).toBeInTheDocument();
   });
 
-  it("lets the user expand the full handoff only when needed", async () => {
+  it("opens the full handoff in a modal dialog when the user asks for more", async () => {
     const user = userEvent.setup();
     renderAt("/builder");
 
-    const toggle = screen.getByRole("button", { name: /see more/i });
-    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    const trigger = screen.getByRole("button", { name: /see more/i });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
-    await user.click(toggle);
+    await user.click(trigger);
 
-    expect(screen.getByRole("button", { name: /see less/i })).toHaveAttribute("aria-expanded", "true");
+    const dialog = await screen.findByRole("dialog");
+    expect(dialog).toHaveAttribute("aria-modal", "true");
+    expect(within(dialog).getByText(/Inspect the codebase, docs, config files, package manifests, tests, and any existing notes before writing the README./)).toBeInTheDocument();
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    await user.keyboard("{Escape}");
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 });

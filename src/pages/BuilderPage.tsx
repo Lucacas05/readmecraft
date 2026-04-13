@@ -34,7 +34,7 @@ export function BuilderPage() {
         </header>
       }
       configurator={
-        <div className="poster-frame flex h-full flex-col justify-between gap-5 p-5 md:p-6">
+        <div className="poster-frame flex flex-col gap-5 p-5 md:p-6">
           <ControlGroup title={README_CONTROL_COPY.presetHeading}>
             <PresetPicker
               activePreset={config.preset}
