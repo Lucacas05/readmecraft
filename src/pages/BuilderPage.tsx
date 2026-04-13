@@ -34,7 +34,7 @@ export function BuilderPage() {
         </header>
       }
       configurator={
-        <div className="poster-frame p-4 space-y-4">
+        <div className="poster-frame flex h-full flex-col justify-between gap-5 p-5 md:p-6">
           <ControlGroup title={README_CONTROL_COPY.presetHeading}>
             <PresetPicker
               activePreset={config.preset}
@@ -42,7 +42,7 @@ export function BuilderPage() {
             />
           </ControlGroup>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3 md:items-start">
             <ControlGroup title={README_CONTROL_COPY.toneHeading}>
               <ToneControl value={config.tone} onChange={(tone) => dispatch({ type: "set-tone", tone })} />
             </ControlGroup>
@@ -77,7 +77,7 @@ export function BuilderPage() {
 
 function ControlGroup({ title, children }: PropsWithChildren<{ title: string }>) {
   return (
-    <section className="space-y-1.5">
+    <section className="space-y-2">
       <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{title}</h3>
       {children}
     </section>

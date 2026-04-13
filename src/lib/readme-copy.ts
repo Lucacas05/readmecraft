@@ -68,4 +68,6 @@ export const README_PANEL_COPY = {
   promptAction: "Copy handoff",
   promptActionDone: "Copied",
   promptFallbackAction: "Copy manually",
+  promptExpandAction: "See more",
+  promptCollapseAction: "See less",
 } as const;

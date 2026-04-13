@@ -21,7 +21,7 @@ export function SectionToggleList({ sections, onToggle }: SectionToggleListProps
             type="button"
             onClick={() => onToggle(sectionKey)}
             className={cn(
-              "flex items-center justify-between gap-3 border-2 px-3 py-1.5 text-left transition-colors",
+              "flex min-h-11 items-center justify-between gap-3 border-2 px-3 py-2 text-left transition-colors",
               enabled
                 ? "border-border bg-secondary text-secondary-foreground"
                 : "border-border bg-background text-foreground hover:bg-highlight",

@@ -1,0 +1,30 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - heading "Build a README prompt that stays clear." [level=1] [ref=e6]:
+      - text: Build a README prompt that stays
+      - generic [ref=e8]: clear.
+    - button "Start building" [ref=e9] [cursor=pointer]
+  - generic [ref=e10]:
+    - heading "How it works." [level=2] [ref=e12]
+    - list [ref=e13]:
+      - listitem [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e16]: "1"
+          - generic [ref=e17]: Step
+        - generic [ref=e18]:
+          - heading "Choose" [level=3] [ref=e19]
+          - paragraph [ref=e20]: Pick a preset, tone, structure, and presentation that fit your project.
+      - listitem [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: "2"
+          - generic [ref=e24]: Step
+        - generic [ref=e25]:
+          - heading "Tune" [level=3] [ref=e26]
+          - paragraph [ref=e27]: Toggle the sections you need and drop the ones you don't.
+      - listitem [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]: "3"
+          - generic [ref=e31]: Step
+        - generic [ref=e32]:
+          - heading "Hand off" [level=3] [ref=e33]
+          - paragraph [ref=e34]: Copy one unified handoff so your local IDE agent can inspect the repo and complete the README.

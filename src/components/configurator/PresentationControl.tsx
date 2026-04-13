@@ -9,11 +9,12 @@ type PresentationControlProps = {
 
 export function PresentationControl({ value, onChange }: PresentationControlProps) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="grid gap-3">
       {README_PRESENTATION_KEYS.map((presentation) => (
         <Button
           key={presentation}
           size="sm"
+          className="w-full justify-start"
           variant={value === presentation ? "default" : "outline"}
           onClick={() => onChange(presentation)}
         >

@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
 import { AppRoutes } from "@/App";
-import { README_DISCLAIMER_COPY } from "@/lib/readme-copy";
 import { ReadmeConfigProvider } from "@/state/readme-config";
 
 function renderAt(path: string) {
@@ -52,7 +51,10 @@ describe("BuilderPage", () => {
   it("shows shared-copy guidance and a unified prompt with the embedded template", () => {
     renderAt("/builder");
 
-    expect(screen.getByText(README_DISCLAIMER_COPY.sharedConfig)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/one copy now contains the instructions and the readme template generated from this same shared config/i),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /see more/i })).toHaveAttribute("aria-expanded", "false");
 
     const promptSection = getPromptSection();
 
@@ -109,5 +111,17 @@ describe("BuilderPage", () => {
     });
 
     expect(screen.getByRole("button", { name: /copied/i })).toBeInTheDocument();
+  });
+
+  it("lets the user expand the full handoff only when needed", async () => {
+    const user = userEvent.setup();
+    renderAt("/builder");
+
+    const toggle = screen.getByRole("button", { name: /see more/i });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+
+    await user.click(toggle);
+
+    expect(screen.getByRole("button", { name: /see less/i })).toHaveAttribute("aria-expanded", "true");
   });
 });

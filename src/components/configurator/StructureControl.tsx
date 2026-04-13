@@ -9,11 +9,12 @@ type StructureControlProps = {
 
 export function StructureControl({ value, onChange }: StructureControlProps) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="grid gap-3">
       {README_STRUCTURE_KEYS.map((structure) => (
         <Button
           key={structure}
           size="sm"
+          className="w-full justify-start"
           variant={value === structure ? "default" : "outline"}
           onClick={() => onChange(structure)}
         >

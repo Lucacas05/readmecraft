@@ -1,0 +1,67 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - link "Back to home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - text: Back to home
+    - heading "README.md Builder" [level=1] [ref=e9]
+  - generic [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - heading "Start from a locked preset" [level=3] [ref=e13]
+        - generic [ref=e14]:
+          - button "Minimal" [ref=e15] [cursor=pointer]
+          - button "Professional" [ref=e16] [cursor=pointer]
+          - button "Open Source" [ref=e17] [cursor=pointer]
+          - button "Portfolio" [ref=e18] [cursor=pointer]
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - heading "Tone" [level=3] [ref=e21]
+          - generic [ref=e22]:
+            - button "Concise" [ref=e23] [cursor=pointer]
+            - button "Professional" [ref=e24] [cursor=pointer]
+            - button "Technical" [ref=e25] [cursor=pointer]
+            - button "Personal" [ref=e26] [cursor=pointer]
+        - generic [ref=e27]:
+          - heading "Structure" [level=3] [ref=e28]
+          - generic [ref=e29]:
+            - button "Lean" [ref=e30] [cursor=pointer]
+            - button "Standard" [ref=e31] [cursor=pointer]
+            - button "Expanded" [ref=e32] [cursor=pointer]
+        - generic [ref=e33]:
+          - heading "Presentation" [level=3] [ref=e34]
+          - generic [ref=e35]:
+            - button "Plain" [ref=e36] [cursor=pointer]
+            - button "Scannable" [ref=e37] [cursor=pointer]
+            - button "Showcase" [ref=e38] [cursor=pointer]
+      - generic [ref=e39]:
+        - heading "Sections" [level=3] [ref=e40]
+        - generic [ref=e41]:
+          - button "Overview" [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]: Overview
+            - img [ref=e44]
+          - button "Installation" [ref=e46] [cursor=pointer]:
+            - generic [ref=e47]: Installation
+            - img [ref=e48]
+          - button "Usage" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]: Usage
+            - img [ref=e52]
+          - button "Features" [ref=e54] [cursor=pointer]:
+            - generic [ref=e55]: Features
+            - img [ref=e56]
+          - button "Configuration" [ref=e58] [cursor=pointer]:
+            - generic [ref=e59]: Configuration
+            - img [ref=e60]
+          - button "Contributing" [ref=e62] [cursor=pointer]:
+            - generic [ref=e63]: Contributing
+          - button "License" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: License
+            - img [ref=e66]
+          - button "Screenshots" [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: Screenshots
+    - generic [ref=e70]:
+      - heading "Unified handoff for your local IDE agent" [level=2] [ref=e72]
+      - generic [ref=e73]:
+        - button "Copy handoff" [ref=e75] [cursor=pointer]
+        - code [ref=e78]: "You are working locally inside this repository. Inspect the codebase, docs, config files, package manifests, tests, and any existing notes before writing the README. Infer project facts from the repository itself. Do not rely on the user to fill in missing project details unless the repo truly does not contain them. Do not say this prompt builder analyzed the repository. It only provided style and structure preferences. Create or update README.md using the following configuration: - Preset: Professional - Tone: Professional - Structure: Standard - Presentation: Scannable Execution requirements: - If README.md already exists, read it first and preserve any verified project-specific details that should remain. - If README.md does not exist, create it. - Continue filling the README template below until the file is ready to commit. - Replace every placeholder with facts verified from the repository and remove bracketed guidance from the final README. - Write the final result into README.md in this repository. Required section order: 1. Overview 2. Installation 3. Usage 4. Features 5. Configuration 6. License Writing guidance: - Write in a professional tone that is clear, polished, and practical. - Keep the README balanced and practical, with enough context for a first-time reader to get started. - Use headings, bullets, and short blocks so the README is easy to skim. - Verify claims against the repository. If a fact is uncertain, inspect more files or keep the wording explicitly tentative. - Use Markdown that is ready to commit as README.md. Start from this README.md template: ```md <a id=\"readme-top\"></a> <!-- Replace every placeholder in brackets with repository-derived facts. Remove any optional block the repository does not support. --> # [Project Name] > Write this README in a professional tone with a standard structure and scannable presentation. Replace every placeholder with repository-derived facts. [Write a one-sentence summary grounded in the repository.] [Add one short supporting sentence about who this project is for or what outcome it enables.] [Optional: add verified quick links such as Docs, Demo, Issues, or Releases if the repository clearly supports them.] <!-- TABLE OF CONTENTS --> <details> <summary>Table of Contents</summary> <ol> <li><a href=\"#overview\">Overview</a></li> <li><a href=\"#installation\">Installation</a></li> <li><a href=\"#usage\">Usage</a></li> <li><a href=\"#features\">Features</a></li> <li><a href=\"#configuration\">Configuration</a></li> <li><a href=\"#license\">License</a></li> </ol> </details> ## Overview [Explain what the project does, who it is for, and why it exists using details confirmed from the repository.] ### Built With - [Primary language, runtime, or platform verified from the repo] - [Main framework or library verified from the repo] - [Important tooling, service, or deployment target if relevant] <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ## Installation ### Prerequisites - [List the verified tools, runtimes, package managers, or services required.] ### Setup 1. [Clone or obtain the project in the verified way.] 2. [Install dependencies using the real package manager or build tooling.] 3. [Configure required environment variables, secrets, or local services.] ### Run ```sh [Insert the first verified command that starts, builds, or serves the project] ``` <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ## Usage ### Typical Workflow 1. [Describe the most common way a user or developer interacts with the project.] 2. [Describe the next meaningful step, screen, route, or command.] 3. [Describe the expected output, result, or artifact.] ### Example ```sh [Insert a concrete example command, route, or interaction sequence verified from the repo] ``` [Explain what the reader should expect after running the example.] <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ## Features - **[Feature name]** — [Key capability confirmed in code or docs.] - **[Feature name]** — [Second capability confirmed in code or docs.] - **[Feature name]** — [Optional standout detail if the repo clearly supports it.] <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ## Configuration | Setting | Required | Default | Notes | | --- | --- | --- | --- | | [VAR_OR_OPTION] | [Yes/No] | [value or none] | [What it controls and where it is used] | | [VAR_OR_OPTION] | [Yes/No] | [value or none] | [What it controls and where it is used] | <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ## License [State the real license after verifying the license file or package metadata.] [If relevant, add a short sentence about usage, distribution, or attribution expectations based on the actual license.] <p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p> ```"
+        - button "See more" [ref=e80] [cursor=pointer]
