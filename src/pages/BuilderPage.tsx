@@ -29,7 +29,7 @@ export function BuilderPage() {
               <ArrowLeft className="h-4 w-4" />
               Back to home
             </Link>
-            <h1 className="text-3xl leading-none md:text-4xl">ReadmeCraft Builder</h1>
+            <h1 className="text-3xl leading-none md:text-4xl">README.md Builder</h1>
           </div>
         </header>
       }

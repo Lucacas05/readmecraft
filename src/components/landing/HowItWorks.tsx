@@ -29,7 +29,10 @@ export function HowItWorks() {
 
       <ol className="grid gap-6 md:grid-cols-3">
         {STEPS.map((step, index) => (
-          <li key={step.title} className="poster-frame overflow-hidden">
+          <li
+            key={step.title}
+            className="poster-frame overflow-hidden transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_hsl(var(--border))]"
+          >
             <div className="flex items-start justify-between gap-4 bg-secondary px-6 py-6 text-secondary-foreground">
               <span className="text-5xl font-black leading-none md:text-6xl">
                 {index + 1}
