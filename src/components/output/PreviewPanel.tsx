@@ -8,7 +8,7 @@ type PreviewPanelProps = {
 
 export function PreviewPanel({ preview }: PreviewPanelProps) {
   return (
-    <section className="section-shell space-y-4">
+    <section className="section-shell min-w-0 space-y-4">
       <div className="space-y-2">
         <span className="eyebrow">{README_PANEL_COPY.previewEyebrow}</span>
         <h2 className="text-3xl leading-none md:text-4xl">{README_PANEL_COPY.previewTitle}</h2>

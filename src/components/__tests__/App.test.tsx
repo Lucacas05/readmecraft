@@ -1,8 +1,20 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 
-import App from "@/App";
+import { AppRoutes } from "@/App";
 import { README_DISCLAIMER_COPY } from "@/lib/readme-copy";
+import { ReadmeConfigProvider } from "@/state/readme-config";
+
+function renderAt(path: string) {
+  return render(
+    <ReadmeConfigProvider>
+      <MemoryRouter initialEntries={[path]}>
+        <AppRoutes />
+      </MemoryRouter>
+    </ReadmeConfigProvider>,
+  );
+}
 
 function getPromptSection() {
   const heading = screen.getByRole("heading", { name: /prompt for your local ide agent/i });
@@ -14,9 +26,26 @@ function getPreviewSection() {
   return heading.closest("section") as HTMLElement;
 }
 
-describe("App", () => {
+describe("LandingPage", () => {
+  it("shows the hero and sends users to the builder on CTA click", async () => {
+    const user = userEvent.setup();
+    renderAt("/");
+
+    expect(
+      screen.getByRole("heading", { name: /build a readme prompt that stays/i }),
+    ).toBeInTheDocument();
+
+    expect(screen.queryByRole("heading", { name: /illustrative readme preview/i })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /open the builder/i }));
+
+    expect(screen.getByRole("heading", { name: /illustrative readme preview/i })).toBeInTheDocument();
+  });
+});
+
+describe("BuilderPage", () => {
   it("keeps the chooser-only flow free of repo-facts inputs", () => {
-    render(<App />);
+    renderAt("/builder");
 
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     expect(screen.queryByLabelText(/project name/i)).not.toBeInTheDocument();
@@ -26,7 +55,7 @@ describe("App", () => {
   });
 
   it("shows first-load disclaimers and synchronized chooser-only outputs", () => {
-    render(<App />);
+    renderAt("/builder");
 
     expect(screen.getByText(README_DISCLAIMER_COPY.promptSync)).toBeInTheDocument();
     expect(screen.getByText(README_DISCLAIMER_COPY.previewSync)).toBeInTheDocument();
@@ -41,7 +70,7 @@ describe("App", () => {
   });
 
   it("keeps prompt and preview aligned when preset and controls change", () => {
-    render(<App />);
+    renderAt("/builder");
 
     fireEvent.click(screen.getByRole("button", { name: /portfolio/i }));
 
@@ -73,7 +102,7 @@ describe("App", () => {
       value: { writeText },
     });
 
-    render(<App />);
+    renderAt("/builder");
 
     const promptSection = getPromptSection();
     const displayedPrompt = promptSection.querySelector("code")?.textContent;

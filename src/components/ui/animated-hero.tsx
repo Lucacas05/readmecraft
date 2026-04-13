@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,6 +7,14 @@ import { cn } from "@/lib/utils";
 type AnimatedHeroProps = {
   className?: string;
   rotatingWords?: string[];
+  primaryCta?: {
+    label: string;
+    onClick: () => void;
+  };
+  secondaryCta?: {
+    label: string;
+    onClick: () => void;
+  };
 };
 
 const DEFAULT_WORDS = ["clear", "local", "usable", "sharp"];
@@ -15,6 +22,8 @@ const DEFAULT_WORDS = ["clear", "local", "usable", "sharp"];
 export function AnimatedHero({
   className,
   rotatingWords = DEFAULT_WORDS,
+  primaryCta,
+  secondaryCta,
 }: AnimatedHeroProps) {
   const words = useMemo(
     () => (rotatingWords.length > 0 ? rotatingWords : DEFAULT_WORDS),
@@ -68,11 +77,19 @@ export function AnimatedHero({
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-          <Button size="lg">Start with presets</Button>
-          <Button variant="outline" size="lg" className="justify-between">
-            Adapted from references
-            <ArrowUpRight className="h-4 w-4" />
+          <Button size="lg" onClick={primaryCta?.onClick}>
+            {primaryCta?.label ?? "Start with presets"}
           </Button>
+          {secondaryCta ? (
+            <Button
+              variant="outline"
+              size="lg"
+              className="justify-between"
+              onClick={secondaryCta.onClick}
+            >
+              {secondaryCta.label}
+            </Button>
+          ) : null}
         </div>
       </div>
     </section>
