@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import { BuilderPage } from "@/pages/BuilderPage";
 import { LandingPage } from "@/pages/LandingPage";
@@ -20,6 +21,7 @@ function App() {
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
+      <Analytics />
     </ReadmeConfigProvider>
   );
 }
