@@ -8,9 +8,9 @@
 
 ## Phase 2: Domain model and shared copy
 
-- [ ] 2.1 Create `src/types/readme.ts` and `src/data/presets.ts` with `ReadmeConfig`, section/tone/presentation contracts, and the locked presets: Minimal, Professional, Open Source, and Portfolio.
-- [ ] 2.2 Create `src/state/readme-config.tsx` with reducer, provider, valid default preset, preset application, and a guard that prevents disabling the last enabled section.
-- [ ] 2.3 Create `src/lib/readme-copy.ts` with stable UI labels, local-agent disclaimers, and illustrative-preview messaging reused by generators and panels.
+- [x] 2.1 Create `src/types/readme.ts` and `src/data/presets.ts` with `ReadmeConfig`, section/tone/presentation contracts, and the locked presets: Minimal, Professional, Open Source, and Portfolio.
+- [x] 2.2 Create `src/state/readme-config.tsx` with reducer, provider, valid default preset, preset application, and a guard that prevents disabling the last enabled section.
+- [x] 2.3 Create `src/lib/readme-copy.ts` with stable UI labels, local-agent disclaimers, and illustrative-preview messaging reused by generators and panels.
 
 ## Phase 3: Outputs and UI wiring
 

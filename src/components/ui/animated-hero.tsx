@@ -61,9 +61,9 @@ export function AnimatedHero({
           </div>
 
           <p className="support-copy">
-            Pick structure, tone, and presentation later from one shared config.
-            This first slice locks the visual language now so the product feels
-            like a postered tool, not a soft dashboard.
+            Pick structure, tone, presentation, and sections from one shared
+            config object. The app stays chooser-only here, then hands the real
+            repository inspection to your local IDE agent later.
           </p>
         </div>
 
