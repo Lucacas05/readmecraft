@@ -42,7 +42,7 @@ export const README_CONTROL_COPY = {
   presentationHeading: "Presentation",
   sectionsHeading: "Sections",
   guardrailLabel: "At least one section stays enabled.",
-  handoffLabel: "Local agent handoff",
+  handoffLabel: "Unified local agent handoff",
   enabledLabel: "Enabled",
   disabledLabel: "Disabled",
   sectionOrderLabel: "Enabled section order",
@@ -50,31 +50,22 @@ export const README_CONTROL_COPY = {
 
 export const README_DISCLAIMER_COPY = {
   configurator:
-    "This MVP only chooses structure and style. Your local IDE agent inspects the repository later.",
+    "This MVP chooses structure and style. Your local IDE agent still inspects the repository and fills the README.",
   prompt:
-    "Prompt output will instruct the local IDE agent to inspect the repository before writing the final README.",
-  preview:
-    "Preview content stays illustrative. It never claims this app already analyzed your repository.",
-  sharedConfig:
-    "Prompt and preview stay aligned because they will read from this same shared config object.",
+    "The copied handoff tells the local IDE agent to inspect the repository, then create or update README.md using the embedded template.",
   promptSync:
-    "Copy this prompt into your local IDE agent. It tells the agent to inspect the repo before drafting README content.",
-  previewSync:
-    "This preview mirrors the same chooser state as the prompt, but it remains a placeholder-only sketch.",
-  previewBadge: "Illustrative preview only",
-  previewLabel:
-    "Placeholder README layout. Final project facts still come from your local IDE agent's repository inspection.",
+    "Copy this unified handoff into your local IDE agent. It includes both the repository-inspection instructions and the README template to complete.",
+  sharedConfig:
+    "One copy now contains the instructions and the README template generated from this same shared config.",
 } as const;
 
 export const README_PANEL_COPY = {
   configuratorTitle: "Choose the README direction",
   configuratorDescription:
-    "Adjust the same shared config object that drives both the agent prompt and the illustrative preview.",
-  promptTitle: "Prompt for your local IDE agent",
-  promptEyebrow: "Copy-ready output",
-  promptAction: "Copy prompt",
+    "Adjust the shared config that shapes the agent instructions and the embedded README.md template.",
+  promptTitle: "Unified handoff for your local IDE agent",
+  promptEyebrow: "Instructions + template",
+  promptAction: "Copy handoff",
   promptActionDone: "Copied",
   promptFallbackAction: "Copy manually",
-  previewTitle: "Illustrative README preview",
-  previewEyebrow: "Placeholder output",
 } as const;

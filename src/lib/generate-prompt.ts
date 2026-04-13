@@ -5,6 +5,7 @@ import {
   README_STRUCTURE_LABELS,
   README_TONE_LABELS,
 } from "@/lib/readme-copy";
+import { buildReadmeTemplate } from "@/lib/readme-template";
 import { getEnabledSectionKeys, type ReadmeConfig, type ReadmeSectionKey } from "@/types/readme";
 
 const STRUCTURE_GUIDANCE: Record<ReadmeConfig["structure"], string> = {
@@ -33,6 +34,7 @@ function formatSectionChecklist(sectionKeys: ReadmeSectionKey[]) {
 export function buildPrompt(config: ReadmeConfig) {
   const enabledSections = getEnabledSectionKeys(config.sections);
   const presetLabel = getPresetDefinition(config.preset).name;
+  const template = buildReadmeTemplate(config);
 
   return [
     "You are working locally inside this repository.",
@@ -40,11 +42,18 @@ export function buildPrompt(config: ReadmeConfig) {
     "Infer project facts from the repository itself. Do not rely on the user to fill in missing project details unless the repo truly does not contain them.",
     "Do not say this prompt builder analyzed the repository. It only provided style and structure preferences.",
     "",
-    "Create or rewrite README.md using the following configuration:",
+    "Create or update README.md using the following configuration:",
     `- Preset: ${presetLabel}`,
     `- Tone: ${README_TONE_LABELS[config.tone]}`,
     `- Structure: ${README_STRUCTURE_LABELS[config.structure]}`,
     `- Presentation: ${README_PRESENTATION_LABELS[config.presentation]}`,
+    "",
+    "Execution requirements:",
+    "- If README.md already exists, read it first and preserve any verified project-specific details that should remain.",
+    "- If README.md does not exist, create it.",
+    "- Continue filling the README template below until the file is ready to commit.",
+    "- Replace every placeholder with facts verified from the repository and remove bracketed guidance from the final README.",
+    "- Write the final result into README.md in this repository.",
     "",
     "Required section order:",
     formatSectionChecklist(enabledSections),
@@ -56,6 +65,9 @@ export function buildPrompt(config: ReadmeConfig) {
     "- Verify claims against the repository. If a fact is uncertain, inspect more files or keep the wording explicitly tentative.",
     "- Use Markdown that is ready to commit as README.md.",
     "",
-    "For each enabled section, prefer repository-derived details over generic filler. If a selected section is unsupported by the repository, keep the section honest and minimal rather than inventing content.",
+    "Start from this README.md template:",
+    "```md",
+    template,
+    "```",
   ].join("\n");
 }

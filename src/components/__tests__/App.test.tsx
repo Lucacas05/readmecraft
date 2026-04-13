@@ -17,12 +17,7 @@ function renderAt(path: string) {
 }
 
 function getPromptSection() {
-  const heading = screen.getByRole("heading", { name: /prompt for your local ide agent/i });
-  return heading.closest("section") as HTMLElement;
-}
-
-function getPreviewSection() {
-  const heading = screen.getByRole("heading", { name: /illustrative readme preview/i });
+  const heading = screen.getByRole("heading", { name: /unified handoff for your local ide agent/i });
   return heading.closest("section") as HTMLElement;
 }
 
@@ -35,11 +30,11 @@ describe("LandingPage", () => {
       screen.getByRole("heading", { name: /build a readme prompt that stays/i }),
     ).toBeInTheDocument();
 
-    expect(screen.queryByRole("heading", { name: /illustrative readme preview/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /unified handoff for your local ide agent/i })).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: /open the builder/i }));
+    await user.click(screen.getByRole("button", { name: /start building/i }));
 
-    expect(screen.getByRole("heading", { name: /illustrative readme preview/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /unified handoff for your local ide agent/i })).toBeInTheDocument();
   });
 });
 
@@ -54,46 +49,44 @@ describe("BuilderPage", () => {
     expect(screen.queryByPlaceholderText(/project name|project description|repository details|feature list/i)).not.toBeInTheDocument();
   });
 
-  it("shows first-load disclaimers and synchronized chooser-only outputs", () => {
+  it("shows first-load disclaimers and a unified prompt with the embedded template", () => {
     renderAt("/builder");
 
     expect(screen.getByText(README_DISCLAIMER_COPY.promptSync)).toBeInTheDocument();
-    expect(screen.getByText(README_DISCLAIMER_COPY.previewSync)).toBeInTheDocument();
-    expect(screen.getByText(README_DISCLAIMER_COPY.previewLabel)).toBeInTheDocument();
+    expect(screen.getByText(README_DISCLAIMER_COPY.prompt)).toBeInTheDocument();
 
     const promptSection = getPromptSection();
-    const previewSection = getPreviewSection();
 
     expect(within(promptSection).getByText(/- Preset: Professional/)).toBeInTheDocument();
     expect(within(promptSection).getByText(/- Tone: Professional/)).toBeInTheDocument();
-    expect(within(previewSection).getByText(/professional tone, standard structure, and scannable presentation/i)).toBeInTheDocument();
+    expect(within(promptSection).getByText(/Start from this README.md template:/)).toBeInTheDocument();
+    expect(within(promptSection).getByText(/## Overview/)).toBeInTheDocument();
+    expect(within(promptSection).getByText(/## Installation/)).toBeInTheDocument();
   });
 
-  it("keeps prompt and preview aligned when preset and controls change", () => {
+  it("keeps the unified prompt aligned when preset and controls change", () => {
     renderAt("/builder");
 
     fireEvent.click(screen.getByRole("button", { name: /portfolio/i }));
 
     let promptSection = getPromptSection();
-    let previewSection = getPreviewSection();
 
     expect(within(promptSection).getByText(/- Preset: Portfolio/)).toBeInTheDocument();
     expect(within(promptSection).getByText(/- Tone: Personal/)).toBeInTheDocument();
-    expect(within(previewSection).getByText(/personal tone, standard structure, and showcase presentation/i)).toBeInTheDocument();
-    expect(within(previewSection).getByText(/## Screenshots/)).toBeInTheDocument();
-    expect(within(previewSection).queryByText(/## Installation/)).not.toBeInTheDocument();
+    expect(within(promptSection).getByText(/showcase presentation/i)).toBeInTheDocument();
+    expect(within(promptSection).getByText(/## Screenshots/)).toBeInTheDocument();
+    expect(within(promptSection).queryByText(/## Installation/)).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /^expanded$/i }));
 
     promptSection = getPromptSection();
-    previewSection = getPreviewSection();
 
     expect(within(promptSection).getByText(/- Structure: Expanded/)).toBeInTheDocument();
-    expect(within(previewSection).getByText(/personal tone, expanded structure, and showcase presentation/i)).toBeInTheDocument();
-    expect(promptSection).toHaveTextContent(/inspect the repo/i);
+    expect(promptSection).toHaveTextContent(/inspect the codebase/i);
+    expect(within(promptSection).getByText(/expanded structure/i)).toBeInTheDocument();
   });
 
-  it("copies exactly the displayed prompt template", async () => {
+  it("copies exactly the displayed unified handoff", async () => {
     const user = userEvent.setup();
     const writeText = vi.fn().mockResolvedValue(undefined);
 
@@ -109,7 +102,7 @@ describe("BuilderPage", () => {
 
     expect(displayedPrompt).toBeTruthy();
 
-    await user.click(screen.getByRole("button", { name: /copy prompt/i }));
+    await user.click(screen.getByRole("button", { name: /copy handoff/i }));
 
     await waitFor(() => {
       expect(writeText).toHaveBeenCalledWith(displayedPrompt);

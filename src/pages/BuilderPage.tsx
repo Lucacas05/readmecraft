@@ -8,7 +8,6 @@ import { PresetPicker } from "@/components/configurator/PresetPicker";
 import { SectionToggleList } from "@/components/configurator/SectionToggleList";
 import { StructureControl } from "@/components/configurator/StructureControl";
 import { ToneControl } from "@/components/configurator/ToneControl";
-import { PreviewPanel } from "@/components/output/PreviewPanel";
 import { PromptPanel } from "@/components/output/PromptPanel";
 import {
   README_CONTROL_COPY,
@@ -18,7 +17,6 @@ import {
   README_SECTION_LABELS,
   README_TONE_LABELS,
 } from "@/lib/readme-copy";
-import { buildPreview } from "@/lib/generate-preview";
 import { buildPrompt } from "@/lib/generate-prompt";
 import {
   useActivePresetDefinition,
@@ -29,7 +27,6 @@ export function BuilderPage() {
   const { config, dispatch, enabledSectionCount, enabledSections } = useReadmeConfig();
   const activePreset = useActivePresetDefinition();
   const prompt = buildPrompt(config);
-  const preview = buildPreview(config);
   const enabledSectionLabels = enabledSections
     .map((sectionKey) => README_SECTION_LABELS[sectionKey])
     .join(" · ");
@@ -48,8 +45,7 @@ export function BuilderPage() {
             </Link>
             <h1 className="text-3xl leading-none md:text-4xl">ReadmeCraft Builder</h1>
             <p className="support-copy max-w-2xl">
-              Tune the chooser-only config on the left. The prompt and illustrative preview on
-              the right update as you go.
+              Tune the chooser-only config on the left. The unified handoff on the right updates as you go.
             </p>
           </div>
         </header>
@@ -102,7 +98,7 @@ export function BuilderPage() {
               onChange={(presentation) => dispatch({ type: "set-presentation", presentation })}
             />
           </ControlGroup>
-          <ControlGroup title={README_CONTROL_COPY.sectionsHeading} description={README_DISCLAIMER_COPY.preview}>
+          <ControlGroup title={README_CONTROL_COPY.sectionsHeading} description={README_DISCLAIMER_COPY.configurator}>
             <SectionToggleList
               sections={config.sections}
               enabledSectionCount={enabledSectionCount}
@@ -112,12 +108,7 @@ export function BuilderPage() {
           </ControlGroup>
         </div>
       }
-      outputs={
-        <div className="grid gap-6">
-          <PromptPanel prompt={prompt} />
-          <PreviewPanel preview={preview} />
-        </div>
-      }
+      outputs={<PromptPanel prompt={prompt} />}
     />
   );
 }

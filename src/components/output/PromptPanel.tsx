@@ -53,6 +53,7 @@ export function PromptPanel({ prompt }: PromptPanelProps) {
         <span className="eyebrow">{README_PANEL_COPY.promptEyebrow}</span>
         <h2 className="text-3xl leading-none md:text-4xl">{README_PANEL_COPY.promptTitle}</h2>
         <p className="support-copy">{README_DISCLAIMER_COPY.promptSync}</p>
+        <p className="support-copy max-w-none">{README_DISCLAIMER_COPY.prompt}</p>
       </div>
 
       <CodeBlock>

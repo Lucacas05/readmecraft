@@ -14,7 +14,7 @@ const STEPS: Step[] = [
   },
   {
     title: "Hand off",
-    description: "Copy the prompt and drop it into your local IDE agent.",
+    description: "Copy one unified handoff so your local IDE agent can inspect the repo and complete the README.",
   },
 ];
 
