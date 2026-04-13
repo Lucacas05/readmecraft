@@ -14,7 +14,8 @@
       "Bash(kill 80018)",
       "Bash(wait 80018)",
       "Bash(npm install:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(bun run:*)"
     ]
   }
 }

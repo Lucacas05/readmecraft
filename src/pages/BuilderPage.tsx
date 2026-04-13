@@ -22,13 +22,13 @@ export function BuilderPage() {
       hero={
         <header className="flex flex-col gap-4 border-b-2 border-border pb-6 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to home
-            </Link>
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Back to home
+              </Link>
             <h1 className="text-3xl leading-none md:text-4xl">README.md Builder</h1>
           </div>
         </header>
