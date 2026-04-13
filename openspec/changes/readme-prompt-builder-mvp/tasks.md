@@ -14,10 +14,10 @@
 
 ## Phase 3: Outputs and UI wiring
 
-- [ ] 3.1 Create `src/lib/generate-prompt.ts` and `src/lib/generate-preview.ts` so one `ReadmeConfig` snapshot drives both outputs, requires local repo inspection, and keeps preview content placeholder-safe.
-- [ ] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
-- [ ] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
-- [ ] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
+- [x] 3.1 Create `src/lib/generate-prompt.ts` and `src/lib/generate-preview.ts` so one `ReadmeConfig` snapshot drives both outputs, requires local repo inspection, and keeps preview content placeholder-safe.
+- [x] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
+- [x] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
+- [x] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
 
 ## Phase 4: Verification
 

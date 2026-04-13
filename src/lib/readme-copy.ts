@@ -43,6 +43,9 @@ export const README_CONTROL_COPY = {
   sectionsHeading: "Sections",
   guardrailLabel: "At least one section stays enabled.",
   handoffLabel: "Local agent handoff",
+  enabledLabel: "Enabled",
+  disabledLabel: "Disabled",
+  sectionOrderLabel: "Enabled section order",
 } as const;
 
 export const README_DISCLAIMER_COPY = {
@@ -54,4 +57,24 @@ export const README_DISCLAIMER_COPY = {
     "Preview content stays illustrative. It never claims this app already analyzed your repository.",
   sharedConfig:
     "Prompt and preview stay aligned because they will read from this same shared config object.",
+  promptSync:
+    "Copy this prompt into your local IDE agent. It tells the agent to inspect the repo before drafting README content.",
+  previewSync:
+    "This preview mirrors the same chooser state as the prompt, but it remains a placeholder-only sketch.",
+  previewBadge: "Illustrative preview only",
+  previewLabel:
+    "Placeholder README layout. Final project facts still come from your local IDE agent's repository inspection.",
+} as const;
+
+export const README_PANEL_COPY = {
+  configuratorTitle: "Choose the README direction",
+  configuratorDescription:
+    "Adjust the same shared config object that drives both the agent prompt and the illustrative preview.",
+  promptTitle: "Prompt for your local IDE agent",
+  promptEyebrow: "Copy-ready output",
+  promptAction: "Copy prompt",
+  promptActionDone: "Copied",
+  promptFallbackAction: "Copy manually",
+  previewTitle: "Illustrative README preview",
+  previewEyebrow: "Placeholder output",
 } as const;

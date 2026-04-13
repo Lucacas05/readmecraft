@@ -4,6 +4,7 @@
 
 - Phase 1 foundation slice
 - Phase 2 domain model and shared copy slice
+- Phase 3 outputs and UI wiring slice
 
 ## Mode
 
@@ -17,6 +18,10 @@
 - [x] 2.1 Create `src/types/readme.ts` and `src/data/presets.ts` with `ReadmeConfig`, section/tone/presentation contracts, and the locked presets: Minimal, Professional, Open Source, and Portfolio.
 - [x] 2.2 Create `src/state/readme-config.tsx` with reducer, provider, valid default preset, preset application, and a guard that prevents disabling the last enabled section.
 - [x] 2.3 Create `src/lib/readme-copy.ts` with stable UI labels, local-agent disclaimers, and illustrative-preview messaging reused by generators and panels.
+- [x] 3.1 Create `src/lib/generate-prompt.ts` and `src/lib/generate-preview.ts` so one `ReadmeConfig` snapshot drives both outputs, requires local repo inspection, and keeps preview content placeholder-safe.
+- [x] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
+- [x] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
+- [x] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
 
 ## Files Changed
 
@@ -36,9 +41,15 @@
 | `src/data/presets.ts` | Created | Added the four locked presets and a safe config factory. |
 | `src/state/readme-config.tsx` | Created | Added reducer/context state with preset application and last-section guardrail. |
 | `src/lib/readme-copy.ts` | Created | Centralized labels plus local-agent and illustrative preview disclaimers. |
+| `src/lib/generate-prompt.ts` | Created | Built the local-agent prompt generator from the shared config snapshot. |
+| `src/lib/generate-preview.ts` | Created | Built the placeholder-only preview generator from the shared config snapshot. |
+| `src/components/layout/AppShell.tsx` | Created | Extracted the page shell so layout no longer lives inline in `App.tsx`. |
+| `src/components/configurator/*.tsx` | Created | Extracted preset, tone, structure, presentation, and section controls into dedicated brutalist configurator components. |
+| `src/components/output/*.tsx` | Created | Added prompt, preview, and preview-notice panels with copy support and explicit disclaimer copy. |
+| `src/App.tsx` | Updated | Replaced the temporary config snapshot with synchronized configurator, prompt, and preview wiring. |
 | `components.json` | Created | Added shadcn-compatible project metadata for future component additions. |
-| `openspec/changes/readme-prompt-builder-mvp/tasks.md` | Updated | Marked Phase 2 tasks complete. |
-| `openspec/changes/readme-prompt-builder-mvp/apply-progress.md` | Updated | Merged cumulative apply progress for Phases 1 and 2. |
+| `openspec/changes/readme-prompt-builder-mvp/tasks.md` | Updated | Marked Phase 3 tasks complete. |
+| `openspec/changes/readme-prompt-builder-mvp/apply-progress.md` | Updated | Merged cumulative apply progress for Phases 1 through 3. |
 
 ## Validation
 
@@ -50,14 +61,15 @@
 
 - Added `index.html`, `components.json`, `src/App.tsx`, and `src/vite-env.d.ts` as minimal wiring so the foundation slice renders coherently.
 - Kept prompt rendering plain monospace and deferred syntax highlighting.
-- Added a temporary shared-config snapshot panel in `App.tsx` so the reducer/model batch is visible without jumping ahead to the full prompt and preview panels.
+- Replaced the temporary shared-config snapshot panel with prompt and preview panels derived from the same `ReadmeConfig` snapshot.
+- Added clipboard copy with `navigator.clipboard` first and a `document.execCommand("copy")` fallback for older browser contexts.
 
 ## Remaining Tasks
 
-- [ ] 3.1 Create `src/lib/generate-prompt.ts` and `src/lib/generate-preview.ts` so one `ReadmeConfig` snapshot drives both outputs, requires local repo inspection, and keeps preview content placeholder-safe.
-- [ ] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
-- [ ] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
-- [ ] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
 - [ ] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
 - [ ] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
 - [ ] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.
+
+## Status
+
+10/13 tasks complete. Ready for the verification/test batch.
