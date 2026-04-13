@@ -62,7 +62,7 @@ export function PromptPanel({ prompt }: PromptPanelProps) {
             {copyLabel}
           </Button>
         </CodeBlockHeader>
-        <CodeBlockCode code={prompt} language="txt" />
+        <CodeBlockCode code={prompt} language="txt" className="whitespace-pre-wrap break-words" />
       </CodeBlock>
     </section>
   );
