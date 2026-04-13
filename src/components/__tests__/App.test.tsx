@@ -49,14 +49,14 @@ describe("BuilderPage", () => {
     expect(screen.queryByPlaceholderText(/project name|project description|repository details|feature list/i)).not.toBeInTheDocument();
   });
 
-  it("shows first-load disclaimers and a unified prompt with the embedded template", () => {
+  it("shows shared-copy guidance and a unified prompt with the embedded template", () => {
     renderAt("/builder");
 
-    expect(screen.getByText(README_DISCLAIMER_COPY.promptSync)).toBeInTheDocument();
-    expect(screen.getByText(README_DISCLAIMER_COPY.prompt)).toBeInTheDocument();
+    expect(screen.getByText(README_DISCLAIMER_COPY.sharedConfig)).toBeInTheDocument();
 
     const promptSection = getPromptSection();
 
+    expect(within(promptSection).getByText(/Inspect the codebase, docs, config files, package manifests, tests, and any existing notes before writing the README./)).toBeInTheDocument();
     expect(within(promptSection).getByText(/- Preset: Professional/)).toBeInTheDocument();
     expect(within(promptSection).getByText(/- Tone: Professional/)).toBeInTheDocument();
     expect(within(promptSection).getByText(/Start from this README.md template:/)).toBeInTheDocument();
