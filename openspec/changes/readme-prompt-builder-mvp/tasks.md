@@ -21,6 +21,6 @@
 
 ## Phase 4: Verification
 
-- [ ] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
-- [ ] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
-- [ ] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.
+- [x] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
+- [x] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
+- [x] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.

@@ -1,3 +1,4 @@
+import { getPresetDefinition } from "@/data/presets";
 import {
   README_PRESENTATION_LABELS,
   README_SECTION_LABELS,
@@ -31,6 +32,7 @@ function formatSectionChecklist(sectionKeys: ReadmeSectionKey[]) {
 
 export function buildPrompt(config: ReadmeConfig) {
   const enabledSections = getEnabledSectionKeys(config.sections);
+  const presetLabel = getPresetDefinition(config.preset).name;
 
   return [
     "You are working locally inside this repository.",
@@ -39,7 +41,7 @@ export function buildPrompt(config: ReadmeConfig) {
     "Do not say this prompt builder analyzed the repository. It only provided style and structure preferences.",
     "",
     "Create or rewrite README.md using the following configuration:",
-    `- Preset: ${config.preset}`,
+    `- Preset: ${presetLabel}`,
     `- Tone: ${README_TONE_LABELS[config.tone]}`,
     `- Structure: ${README_STRUCTURE_LABELS[config.structure]}`,
     `- Presentation: ${README_PRESENTATION_LABELS[config.presentation]}`,

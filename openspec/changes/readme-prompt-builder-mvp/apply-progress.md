@@ -5,6 +5,7 @@
 - Phase 1 foundation slice
 - Phase 2 domain model and shared copy slice
 - Phase 3 outputs and UI wiring slice
+- Phase 4 verification and test coverage slice
 
 ## Mode
 
@@ -22,6 +23,9 @@
 - [x] 3.2 Create `src/components/layout/AppShell.tsx`, `src/components/configurator/PresetPicker.tsx`, `ToneControl.tsx`, `StructureControl.tsx`, `PresentationControl.tsx`, and `SectionToggleList.tsx` using the brutalist UI primitives.
 - [x] 3.3 Create `src/components/output/PromptPanel.tsx`, `PreviewPanel.tsx`, and `PreviewNotice.tsx` with copy-ready prompt output, explicit sync/disclaimer copy, and illustrative preview labeling.
 - [x] 3.4 Wire `src/App.tsx` so hero/header, configurator, prompt panel, and preview panel stay synchronized on every selection change.
+- [x] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
+- [x] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
+- [x] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.
 
 ## Files Changed
 
@@ -41,21 +45,28 @@
 | `src/data/presets.ts` | Created | Added the four locked presets and a safe config factory. |
 | `src/state/readme-config.tsx` | Created | Added reducer/context state with preset application and last-section guardrail. |
 | `src/lib/readme-copy.ts` | Created | Centralized labels plus local-agent and illustrative preview disclaimers. |
-| `src/lib/generate-prompt.ts` | Created | Built the local-agent prompt generator from the shared config snapshot. |
+| `src/lib/generate-prompt.ts` | Updated | Built the local-agent prompt generator from the shared config snapshot and switched prompt preset output to the human-facing preset label. |
 | `src/lib/generate-preview.ts` | Created | Built the placeholder-only preview generator from the shared config snapshot. |
 | `src/components/layout/AppShell.tsx` | Created | Extracted the page shell so layout no longer lives inline in `App.tsx`. |
 | `src/components/configurator/*.tsx` | Created | Extracted preset, tone, structure, presentation, and section controls into dedicated brutalist configurator components. |
 | `src/components/output/*.tsx` | Created | Added prompt, preview, and preview-notice panels with copy support and explicit disclaimer copy. |
 | `src/App.tsx` | Updated | Replaced the temporary config snapshot with synchronized configurator, prompt, and preview wiring. |
 | `components.json` | Created | Added shadcn-compatible project metadata for future component additions. |
-| `openspec/changes/readme-prompt-builder-mvp/tasks.md` | Updated | Marked Phase 3 tasks complete. |
-| `openspec/changes/readme-prompt-builder-mvp/apply-progress.md` | Updated | Merged cumulative apply progress for Phases 1 through 3. |
+| `src/test/setup.ts` | Created | Registered `@testing-library/jest-dom` matchers for Vitest integration tests. |
+| `src/lib/__tests__/generate-prompt.test.ts` | Created | Added generator assertions for repo-inspection language, selection mapping, and chooser-only handoff guarantees. |
+| `src/lib/__tests__/generate-preview.test.ts` | Created | Added placeholder-only preview coverage and config-to-preview alignment checks. |
+| `src/state/__tests__/readme-config.test.tsx` | Created | Added reducer tests for default preset validity, preset resets, and last-enabled-section guardrails. |
+| `src/components/__tests__/App.test.tsx` | Created | Added app-level sync and disclaimer coverage across preset and control changes. |
+| `package-lock.json` | Updated | Captured installed Testing Library packages for reproducible validation runs. |
+| `package.json`, `vite.config.ts` | Updated | Added Testing Library dependencies and a shared Vitest setup file for DOM assertions. |
+| `openspec/changes/readme-prompt-builder-mvp/tasks.md` | Updated | Marked Phase 4 tasks complete. |
+| `openspec/changes/readme-prompt-builder-mvp/apply-progress.md` | Updated | Merged cumulative apply progress for Phases 1 through 4. |
 
 ## Validation
 
 - ✅ `npm run typecheck`
 - ✅ `npm run build`
-- ✅ `npm run test` (`--passWithNoTests`; no test files yet)
+- ✅ `npm run test`
 
 ## Notes
 
@@ -63,13 +74,13 @@
 - Kept prompt rendering plain monospace and deferred syntax highlighting.
 - Replaced the temporary shared-config snapshot panel with prompt and preview panels derived from the same `ReadmeConfig` snapshot.
 - Added clipboard copy with `navigator.clipboard` first and a `document.execCommand("copy")` fallback for older browser contexts.
+- Added Testing Library-powered unit and integration coverage without introducing any backend or repo-fact input path.
+- Tightened the prompt generator so preset output now uses the human-facing preset label instead of the internal key.
 
 ## Remaining Tasks
 
-- [ ] 4.1 Create `src/lib/__tests__/generate-prompt.test.ts` covering repo-inspection instructions, preset/selection mapping, and no false claim that the app analyzed the repo.
-- [ ] 4.2 Create `src/lib/__tests__/generate-preview.test.ts` and `src/state/__tests__/readme-config.test.tsx` covering placeholder-only preview content, preset validity, prompt/preview alignment inputs, and the last-section guardrail.
-- [ ] 4.3 Create `src/components/__tests__/App.test.tsx` verifying first-load disclaimers, control-to-output synchronization, and the adapted brutalist prompt/preview presentation.
+- None.
 
 ## Status
 
-10/13 tasks complete. Ready for the verification/test batch.
+13/13 tasks complete. Ready for verify.
