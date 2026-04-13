@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import App from "@/App";
 import { README_DISCLAIMER_COPY } from "@/lib/readme-copy";
@@ -14,6 +15,16 @@ function getPreviewSection() {
 }
 
 describe("App", () => {
+  it("keeps the chooser-only flow free of repo-facts inputs", () => {
+    render(<App />);
+
+    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/project name/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/project description/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/repo facts|repository details|feature list/i)).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText(/project name|project description|repository details|feature list/i)).not.toBeInTheDocument();
+  });
+
   it("shows first-load disclaimers and synchronized chooser-only outputs", () => {
     render(<App />);
 
@@ -51,5 +62,30 @@ describe("App", () => {
     expect(within(promptSection).getByText(/- Structure: Expanded/)).toBeInTheDocument();
     expect(within(previewSection).getByText(/personal tone, expanded structure, and showcase presentation/i)).toBeInTheDocument();
     expect(promptSection).toHaveTextContent(/inspect the repo/i);
+  });
+
+  it("copies exactly the displayed prompt template", async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+
+    render(<App />);
+
+    const promptSection = getPromptSection();
+    const displayedPrompt = promptSection.querySelector("code")?.textContent;
+
+    expect(displayedPrompt).toBeTruthy();
+
+    await user.click(screen.getByRole("button", { name: /copy prompt/i }));
+
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalledWith(displayedPrompt);
+    });
+
+    expect(screen.getByRole("button", { name: /copied/i })).toBeInTheDocument();
   });
 });
